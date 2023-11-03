@@ -10,12 +10,14 @@
 
 ## ⚒️ 使用技術
 
+<p>
 <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/nodejs/nodejs-original-wordmark.svg" alt="nodejs" width="40" height="40"/>
 <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/react/react-original-wordmark.svg" alt="react" width="40" height="40"/>
 <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/typescript/typescript-original.svg" alt="typescript" width="40" height="40"/>
 <img src="https://www.vectorlogo.zone/logos/jestjsio/jestjsio-icon.svg" alt="jest" width="40" height="40"/>
 <img src="./public/chakraui.png" width="40" height="40">
 <img src="./public/zod.png" width="40" height="40">
+</p>
 
 | スタック       | ツール名   |
 | -------------- | ---------- |
