@@ -1,4 +1,4 @@
-import { ViewTask } from "./view/tasks";
+import { Tasks, ViewTask } from "./view/tasks";
 
 export const dammy_tasks = [
    new ViewTask(1,"task 1","pending","risa",DummyDate(),DummyDate()),
@@ -9,3 +9,5 @@ export const dammy_tasks = [
 function DummyDate():Date {
     return new Date();
 }
+
+export const tasks = new Tasks();

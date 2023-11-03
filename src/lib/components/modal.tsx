@@ -16,6 +16,7 @@ import {
 } from "@chakra-ui/react";
 import { ViewTask } from "../view/tasks";
 import { SetStateAction, useState } from "react";
+import { tasks } from "../const";
 
 interface CreateProps {
   isOpen: boolean;
@@ -26,8 +27,10 @@ export const CreateModal = (props: CreateProps) => {
   const [taskname, setTaskName] = useState("");
   const [assign, setAssign] = useState("");
   const [status, setStatus] = useState("");
+  const [id, setId] = useState(1);
   const isOpen = props.isOpen;
   const onClose = props.onClose;
+
   const handleChangeTaskName = (e: {
     target: { value: SetStateAction<string> };
   }) => {
@@ -42,9 +45,16 @@ export const CreateModal = (props: CreateProps) => {
     setStatus(value);
   };
   const handleCreate = () => {
-    console.log(taskname);
-    console.log(assign);
-    console.log(status);
+    const task = new ViewTask(
+      id,
+      taskname,
+      status,
+      assign,
+      new Date(),
+      new Date()
+    );
+    tasks.setTasks(task);
+    setId(id + 1);
   };
   return (
     <>
@@ -128,9 +138,15 @@ export const EditModal = (props: EditProps) => {
     setStatus(value);
   };
   const handleEdit = () => {
-    console.log(taskname);
-    console.log(assign);
-    console.log(status);
+    const task = new ViewTask(
+      contents.id,
+      taskname,
+      assign,
+      status,
+      contents.created_at,
+      contents.updated_at
+    );
+    tasks.editElement(contents.id, task);
   };
   return (
     <>
@@ -198,7 +214,7 @@ export const DeleteModal = (props: DeleteProps) => {
   const onClose = props.onClose;
   const id = props.id;
   const handleDelete = (id: number) => {
-    console.log(id);
+    tasks.removeElement(id);
   };
   return (
     <>

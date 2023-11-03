@@ -11,7 +11,7 @@ import {
   Button,
   Flex,
 } from "@chakra-ui/react";
-import { dammy_tasks } from "./lib/const";
+import { tasks } from "./lib/const";
 import { CreateModal, DeleteModal, EditModal } from "./lib/components/modal";
 import { useState } from "react";
 
@@ -68,7 +68,7 @@ function App() {
               </Tr>
             </Thead>
             <Tbody>
-              {dammy_tasks.map((task) => (
+              {tasks.tasks.map((task) => (
                 <Tr key={task.id}>
                   <Td>{task.name}</Td>
                   <Td>{task.status}</Td>
