@@ -108,7 +108,7 @@ export const CreateModal = (props: CreateProps) => {
               <></>
             ) : (
               <>
-                <div>{error}</div>
+                <Box color={"red"}>{error}</Box>
               </>
             )}
           </ModalBody>
