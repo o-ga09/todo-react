@@ -17,6 +17,7 @@ import {
 import { ViewTask } from "../view/tasks";
 import { SetStateAction, useState } from "react";
 import { tasks } from "../const";
+import { z } from "Zod";
 
 interface CreateProps {
   isOpen: boolean;
@@ -28,6 +29,7 @@ export const CreateModal = (props: CreateProps) => {
   const [assign, setAssign] = useState("");
   const [status, setStatus] = useState("");
   const [id, setId] = useState(1);
+  const [error, setError] = useState("");
   const isOpen = props.isOpen;
   const onClose = props.onClose;
 
@@ -45,16 +47,23 @@ export const CreateModal = (props: CreateProps) => {
     setStatus(value);
   };
   const handleCreate = () => {
-    const task = new ViewTask(
-      id,
-      taskname,
-      status,
-      assign,
-      new Date(),
-      new Date()
-    );
-    tasks.setTasks(task);
-    setId(id + 1);
+    const valid = z.string().min(1);
+
+    try {
+      const task = new ViewTask(
+        id,
+        valid.parse(taskname),
+        valid.parse(status),
+        valid.parse(assign),
+        new Date(),
+        new Date()
+      );
+      tasks.setTasks(task);
+      setId(id + 1);
+      onClose();
+    } catch (e) {
+      setError("一文字以上で入力してください");
+    }
   };
   return (
     <>
@@ -95,6 +104,13 @@ export const CreateModal = (props: CreateProps) => {
                 </HStack>
               </RadioGroup>
             </FormControl>
+            {error === "" ? (
+              <></>
+            ) : (
+              <>
+                <div>{error}</div>
+              </>
+            )}
           </ModalBody>
 
           <ModalFooter>
@@ -141,12 +157,13 @@ export const EditModal = (props: EditProps) => {
     const task = new ViewTask(
       contents.id,
       taskname,
-      assign,
       status,
+      assign,
       contents.created_at,
       contents.updated_at
     );
     tasks.editElement(contents.id, task);
+    onClose();
   };
   return (
     <>
@@ -215,6 +232,7 @@ export const DeleteModal = (props: DeleteProps) => {
   const id = props.id;
   const handleDelete = (id: number) => {
     tasks.removeElement(id);
+    onClose();
   };
   return (
     <>
